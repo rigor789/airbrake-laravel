@@ -1,6 +1,7 @@
 <?php namespace rigor789\AirbrakeLaravel;
 
 use Illuminate\Support;
+use Illuminate\Support\ServiceProvider;
 use Exception;
 use Airbrake;
 
