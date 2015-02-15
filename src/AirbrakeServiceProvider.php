@@ -21,6 +21,10 @@ class AirbrakeServiceProvider extends ServiceProvider {
    */
   public function boot()
   {
+    $this->publishes([
+      __DIR__.'/config/airbrake.php' => config_path('airbrake.php'),
+    ]);
+
     $app = $this->app;
 
     if ( ! $this->isEnabled())
