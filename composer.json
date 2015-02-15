@@ -1,0 +1,23 @@
+{
+    "name": "rigor789/airbrake-laravel",
+    "description": "Laravel package for the Airbrake API, which supports Errbit",
+    "keywords": ["laravel", "airbrake", "bug", "error", "errbit", "catch", "monitor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Igor",
+            "email": "rigor789@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*",
+        "airbrake/php-airbrake": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "rigor789\\AirbrakeLaravel\\" : "src/"
+        }
+    }
+}
