@@ -63,19 +63,19 @@ class AirbrakeServiceProvider extends ServiceProvider {
       function ($app)
       {
         $options = [
-          'async'           => $app['config']->get('airbrake-laravel::airbrake.async'),
+          'async'           => $app['config']->get('airbrake.async'),
           'environmentName' => $app->environment(),
           'projectRoot'     => base_path(),
           'url'             => $app['request']->url(),
-          'filters'         => $app['config']->get('airbrake-laravel::airbrake.ignore_exceptions'),
-          'host'            => $app['config']->get('airbrake-laravel::airbrake.connection.host'),
-          'port'            => $app['config']->get('airbrake-laravel::airbrake.connection.port'),
-          'secure'          => $app['config']->get('airbrake-laravel::airbrake.connection.secure'),
-          'verifySsl'       => $app['config']->get('airbrake-laravel::airbrake.connection.verifySsl'),
+          'filters'         => $app['config']->get('airbrake.ignore_exceptions'),
+          'host'            => $app['config']->get('airbrake.connection.host'),
+          'port'            => $app['config']->get('airbrake.connection.port'),
+          'secure'          => $app['config']->get('airbrake.connection.secure'),
+          'verifySsl'       => $app['config']->get('airbrake.connection.verifySsl'),
         ];
 
         $config = new Airbrake\Configuration(
-          $app['config']->get('airbrake-laravel::airbrake.api_key'), $options
+          $app['config']->get('airbrake.api_key'), $options
         );
 
         return new Airbrake\Client($config);
@@ -90,8 +90,8 @@ class AirbrakeServiceProvider extends ServiceProvider {
    */
   protected function isEnabled()
   {
-    $enabled = $this->app['config']->get('airbrake-laravel::airbrake.enabled', false);
-    $ignored = $this->app['config']->get('airbrake-laravel::airbrake.ignore_environments', []);
+    $enabled = $this->app['config']->get('airbrake.enabled', false);
+    $ignored = $this->app['config']->get('airbrake.ignore_environments', []);
 
     return $enabled && ! in_array($this->app->environment(), $ignored);
   }
