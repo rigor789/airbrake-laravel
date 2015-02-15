@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "5.*",
-        "airbrake/php-airbrake": "dev-master"
+        "airbrake/airbrake-php": "dev-master"
     },
     "autoload": {
         "psr-4": {
