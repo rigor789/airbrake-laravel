@@ -13,7 +13,7 @@
         "php": ">=5.4.0",
         "illuminate/support": "5.*",
         "illuminate/contracts": "5.*",
-        "airbrake/airbrake-php": "dev-master"
+        "dbtlr/php-airbrake": "~1.1"
     },
     "autoload": {
         "psr-4": {
