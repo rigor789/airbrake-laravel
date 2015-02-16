@@ -21,9 +21,28 @@ class AirbrakeServiceProvider extends ServiceProvider {
    */
   public function boot()
   {
-    $this->publishes([
-      __DIR__.'/config/airbrake.php' => config_path('airbrake.php'),
-    ]);
+    $this->package('rigor789/airbrake-laravel', 'airbrake-laravel', realpath(__DIR__));
+
+    if ( ! $this->isEnabled())
+    {
+      return;
+    }
+
+    $app = $this->app;
+
+    $app->error(
+      function (Exception $exception) use ($app)
+      {
+        $app['airbrake']->notifyOnException($exception);
+      }
+    );
+
+    $app->fatal(
+      function ($exception) use ($app)
+      {
+        $app['airbrake']->notifyOnException($exception);
+      }
+    );
   }
 
   /**
@@ -33,43 +52,39 @@ class AirbrakeServiceProvider extends ServiceProvider {
    */
   public function register()
   {
-    $this->mergeConfigFrom(
-      __DIR__.'/config/airbrake.php', 'airbrake'
-    );
-
     $this->app->singleton(
       'airbrake',
       function ($app)
       {
         $options = [
-          'async'           => $app['config']->get('airbrake.async'),
+          'async'           => $app['config']->get('airbrake-laravel::airbrake.async'),
           'environmentName' => $app->environment(),
           'projectRoot'     => base_path(),
           'url'             => $app['request']->url(),
-          'filters'         => $app['config']->get('airbrake.ignore_exceptions'),
-          'host'            => $app['config']->get('airbrake.connection.host'),
-          'port'            => $app['config']->get('airbrake.connection.port'),
-          'secure'          => $app['config']->get('airbrake.connection.secure'),
-          'verifySsl'       => $app['config']->get('airbrake.connection.verifySsl'),
+          'filters'         => $app['config']->get('airbrake-laravel::airbrake.ignore_exceptions'),
+          'host'            => $app['config']->get('airbrake-laravel::airbrake.connection.host'),
+          'port'            => $app['config']->get('airbrake-laravel::airbrake.connection.port'),
+          'secure'          => $app['config']->get('airbrake-laravel::airbrake.connection.secure'),
+          'verifySsl'       => $app['config']->get('airbrake-laravel::airbrake.connection.verifySsl'),
         ];
 
         $config = new Airbrake\Configuration(
-          $app['config']->get('airbrake.api_key'), $options
+          $app['config']->get('airbrake-laravel::airbrake.api_key'), $options
         );
 
         return new Airbrake\Client($config);
       }
     );
+  }
 
-    if ( ! $this->isEnabled())
-    {
-      return;
-    }
-    $handler = $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler');
-    $this->app->instance(
-      'Illuminate\Contracts\Debug\ExceptionHandler',
-      new Handler\AirbrakeExceptionHandler($handler, $this->app)
-    );
+  /**
+   * Get the services provided by the provider.
+   *
+   * @return array
+   */
+  public function provides()
+  {
+    return ['airbrake'];
   }
 
   /**
@@ -79,8 +94,8 @@ class AirbrakeServiceProvider extends ServiceProvider {
    */
   protected function isEnabled()
   {
-    $enabled = $this->app['config']->get('airbrake.enabled', false);
-    $ignored = $this->app['config']->get('airbrake.ignore_environments', []);
+    $enabled = $this->app['config']->get('airbrake-laravel::airbrake.enabled', false);
+    $ignored = $this->app['config']->get('airbrake-laravel::airbrake.ignore_environments', []);
 
     return $enabled && ! in_array($this->app->environment(), $ignored);
   }
