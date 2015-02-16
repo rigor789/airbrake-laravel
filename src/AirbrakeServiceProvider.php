@@ -86,7 +86,7 @@ class AirbrakeServiceProvider extends ServiceProvider {
     $this->app->singleton(
       'Illuminate\Contracts\Debug\ExceptionHandler',
       function() use ($handler) {
-        return new rigor789\AirbrakeLaravel\Handler\AirbrakeExceptionHandler($handler);
+        return new Handler\AirbrakeExceptionHandler($handler);
       }
     );
   }
