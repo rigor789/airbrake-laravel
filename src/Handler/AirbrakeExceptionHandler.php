@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Contracts\Foundation\Application;
 
 class AirbrakeExceptionHandler implements ExceptionHandler {
 
@@ -9,11 +10,16 @@ class AirbrakeExceptionHandler implements ExceptionHandler {
    * @var
    */
   private $handler;
+  /**
+   * @var Application
+   */
+  private $app;
 
-  public function __construct(ExceptionHandler $handler)
+  public function __construct(ExceptionHandler $handler, Application $app)
   {
 
     $this->handler = $handler;
+    $this->app = $app;
   }
 
   /**
@@ -27,7 +33,7 @@ class AirbrakeExceptionHandler implements ExceptionHandler {
   public function report(Exception $e)
   {
 
-    App::make('airbrake')->notifyOnException($e);
+    $this->app['airbrake']->notifyOnException($e);
     return $this->handler->report($e);
   }
 

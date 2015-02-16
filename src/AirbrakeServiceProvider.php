@@ -36,7 +36,7 @@ class AirbrakeServiceProvider extends ServiceProvider {
     $this->mergeConfigFrom(
       __DIR__.'/config/airbrake.php', 'airbrake'
     );
-      
+
     $this->app->singleton(
       'airbrake',
       function ($app)
@@ -68,7 +68,7 @@ class AirbrakeServiceProvider extends ServiceProvider {
     $handler = $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler');
     $this->app->instance(
       'Illuminate\Contracts\Debug\ExceptionHandler',
-      new Handler\AirbrakeExceptionHandler($handler)
+      new Handler\AirbrakeExceptionHandler($handler, $this->app)
     );
   }
 
