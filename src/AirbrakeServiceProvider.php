@@ -81,6 +81,14 @@ class AirbrakeServiceProvider extends ServiceProvider {
         return new Airbrake\Client($config);
       }
     );
+
+    $handler = $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler');
+    $this->app->singleton(
+      'Illuminate\Contracts\Debug\ExceptionHandler',
+      function() use ($handler) {
+        return new rigor789\AirbrakeLaravel\Handler\AirbrakeExceptionHandler($handler);
+      }
+    );
   }
 
   /**
