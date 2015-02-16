@@ -83,11 +83,9 @@ class AirbrakeServiceProvider extends ServiceProvider {
     );
 
     $handler = $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler');
-    $this->app->singleton(
+    $this->app->instance(
       'Illuminate\Contracts\Debug\ExceptionHandler',
-      function() use ($handler) {
-        return new Handler\AirbrakeExceptionHandler($handler);
-      }
+      new Handler\AirbrakeExceptionHandler($handler)
     );
   }
 
