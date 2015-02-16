@@ -1,5 +1,7 @@
-# Aribrake Laravel Package
+# Airbrake Laravel Package
 [![Latest Stable Version](https://poser.pugx.org/rigor789/airbrake-laravel/v/stable.svg)](https://packagist.org/packages/rigor789/airbrake-laravel) [![Total Downloads](https://poser.pugx.org/rigor789/airbrake-laravel/downloads.svg)](https://packagist.org/packages/rigor789/airbrake-laravel) [![Latest Unstable Version](https://poser.pugx.org/rigor789/airbrake-laravel/v/unstable.svg)](https://packagist.org/packages/rigor789/airbrake-laravel) [![License](https://poser.pugx.org/rigor789/airbrake-laravel/license.svg)](https://packagist.org/packages/rigor789/airbrake-laravel)
+
+This branch is for Laravel 4!
 
 This is a Laravel package for utilizing [Airbrake API](https://github.com/airbrake/airbrake-php) to collect errors.
 
