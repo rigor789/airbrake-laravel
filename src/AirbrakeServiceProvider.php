@@ -24,27 +24,6 @@ class AirbrakeServiceProvider extends ServiceProvider {
     $this->publishes([
       __DIR__.'/config/airbrake.php' => config_path('airbrake.php'),
     ]);
-
-    $app = $this->app;
-
-    if ( ! $this->isEnabled())
-    {
-      return;
-    }
-
-    $app->error(
-      function (Exception $exception) use ($app)
-      {
-        $app['airbrake']->notifyOnException($exception);
-      }
-    );
-
-    $app->fatal(
-      function ($exception) use ($app)
-      {
-        $app['airbrake']->notifyOnException($exception);
-      }
-    );
   }
 
   /**
@@ -82,6 +61,10 @@ class AirbrakeServiceProvider extends ServiceProvider {
       }
     );
 
+    if ( ! $this->isEnabled())
+    {
+      return;
+    }
     $handler = $this->app->make('Illuminate\Contracts\Debug\ExceptionHandler');
     $this->app->instance(
       'Illuminate\Contracts\Debug\ExceptionHandler',
