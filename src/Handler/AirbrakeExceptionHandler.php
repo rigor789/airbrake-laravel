@@ -32,7 +32,7 @@ class AirbrakeExceptionHandler implements ExceptionHandler {
    */
   public function report(Exception $e)
   {
-    if($this->shouldReport($e)) {
+    if($this->handler->shouldReport($e)) {
       $this->app['airbrake']->notifyOnException($e);      
     }
 
