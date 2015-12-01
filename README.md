@@ -37,7 +37,7 @@ Then add the ServiceProvider to your ``` config/app.php ```
 Once you have added the ServiceProvider to your app you will need to publish the config file.
 
 ```
-php artisan vendor:publish --provider=rigor789/airbrake-laravel
+php artisan vendor:publish --provider="rigor789\AirbrakeLaravel\AirbrakeServiceProvider"
 ```
 
 Then you can enable error reporting in the config, and customize it as you want. You are good to go!
