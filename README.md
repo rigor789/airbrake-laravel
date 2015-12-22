@@ -34,13 +34,20 @@ Then add the ServiceProvider to your ``` config/app.php ```
   
 ```
 
-Once you have added the ServiceProvider to your app you will need to publish the config file.
+Once you have added the ServiceProvider to your app you will need to do some basic configuration. This can be done in your .env file:
+
+```
+AIRBRAKE_ENABLED=true
+AIRBRAKE_API_KEY=your_api_key
+```
+
+You can also publish the config file for more advanced configuration options:
 
 ```
 php artisan vendor:publish --provider="rigor789\AirbrakeLaravel\AirbrakeServiceProvider"
 ```
 
-Then you can enable error reporting in the config, and customize it as you want. You are good to go!
+Then you can enable error reporting also in the config, and customize it as you want. You are good to go!
 
 # Issues
 
