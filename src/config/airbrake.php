@@ -32,7 +32,7 @@ return [
    */
   'connection'          => [
 
-    'host'      => 'api.airbrake.io',
+    'host'      => env('AIRBRAKE_API_HOST','api.airbrake.io'),
 
     'port'      => '443',
 
