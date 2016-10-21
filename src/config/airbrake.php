@@ -13,12 +13,12 @@ return [
   'api_key'             => env('AIRBRAKE_API_KEY', ''),
 
   /**
-   * Should we send errors async
+   * Should we send errors asynchronously?
    */
   'async'               => false,
 
   /**
-   * Which enviroments should be ingored? (ex. local)
+   * Which environments should be ignored? (ex. local)
    */
   'ignore_environments' => [],
 
@@ -28,7 +28,7 @@ return [
   'ignore_exceptions'   => [],
 
   /**
-   * Connection to the airbrake server
+   * Connection to the Airbrake server
    */
   'connection'          => [
 
