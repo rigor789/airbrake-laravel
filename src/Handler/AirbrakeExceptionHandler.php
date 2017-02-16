@@ -2,7 +2,6 @@
 
 use Exception;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Contracts\Foundation\Application;
 
 class AirbrakeExceptionHandler implements ExceptionHandler {
 
@@ -15,7 +14,7 @@ class AirbrakeExceptionHandler implements ExceptionHandler {
    */
   private $app;
 
-  public function __construct(ExceptionHandler $handler, Application $app)
+  public function __construct(ExceptionHandler $handler, $app)
   {
 
     $this->handler = $handler;

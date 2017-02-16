@@ -22,7 +22,7 @@ class AirbrakeServiceProvider extends ServiceProvider {
   public function boot()
   {
     $this->publishes([
-      __DIR__.'/config/airbrake.php' => config_path('airbrake.php'),
+      __DIR__.'/config/airbrake.php' => $this->configPath('airbrake.php'),
     ]);
   }
 
@@ -83,6 +83,13 @@ class AirbrakeServiceProvider extends ServiceProvider {
     $ignored = $this->app['config']->get('airbrake.ignore_environments', []);
 
     return $enabled && ! in_array($this->app->environment(), $ignored);
+  }
+  
+  
+     
+  protected function configPath($path = '')
+  {
+    return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
   }
 }
     
